@@ -4,10 +4,11 @@
             <h2>{{lastName}}</h2>
             <h2>{{ firstName }}</h2>
         </div>
-        <div class="state">
+    <div class="state" v-on:change="sayHello">
             <p v-if="studentState">Présent</p>
             <p v-else>Absent</p>
         </div>
+    <button @click="sayHello">speak</button>
     </div>
 </template>
 
@@ -21,10 +22,14 @@ export default defineComponent({
         firstName: String,
         studentState: Boolean
     },
-    setup() {
-        return{
-            
-        }
+  setup(props) {
+    const sayHello = () => {
+      var msg = new SpeechSynthesisUtterance();
+      msg.text = "Bienvenu " + props.firstName;
+      msg.lang = "fr";
+      window.speechSynthesis.speak(msg);
+    };
+    return { sayHello };
     },
 })
 </script>
