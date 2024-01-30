@@ -1,11 +1,11 @@
 <script setup>
-import Presence from './views/Presence.vue';
+import Menu from './layout/Menu.vue';
 </script>
 
 <template>
-  <div>
-    <Presence></Presence>
-
+  <div class="grid grid-cols-6 h-screen">
+    <Menu class=""></Menu>
+    <router-view class="col-span-5"></router-view>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="content">
+    <div class="content bg-cyan-700 px-3 py-2 mb-3">
         <div class="name">
-            <h2>{{lastName}}</h2>
+            <h2 class="pr-2">{{lastName}}</h2>
             <h2>{{ firstName }}</h2>
         </div>
     <div class="state" v-on:change="sayHello">
@@ -34,14 +34,11 @@ export default defineComponent({
 })
 </script>
 <style>
-.content,.name{
+.name{
     display: flex;
-    justify-content: space-between;
 }
 .content{
-    background-color: #fff;
     width: 20rem;
     border-radius: 20px;
-    padding: 0 15px;
 }
 </style>
