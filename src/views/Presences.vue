@@ -3,17 +3,20 @@
     <div class=" ">
         <div class="h-12 bg-cyan-700"></div>
         <div class="bg-slate-100 px-12 pt-3">
-            <h1 class="text-4xl my-3 text-cyan-700">Listes des presences</h1>
+            <h1 class="text-4xl my-3 text-black">Listes des presences</h1>
 
         <div class="grid grid-cols-2 gap-6 mt-12">
             <div>
-                <h2 class="text-xl text-cyan-700 mb-4">Présents</h2>
+                <h2 class="text-xl text-black mb-4">Présents</h2>
+                <div class=" h-96 overflow-auto grid grid-cols-2 gap-2">
+
                 <div class="rounded-2xl" v-for="student in PresentUsers" :key="student.id">
-                    <Table :Name="PresentUsers.name"  :Mail="PresentUsers.email"/>
+                    <Table :Name="student.name"  :Mail="student.email"/>
+                </div>
                 </div>
             </div>
             <div>
-                <h2 class="text-2xl text-center text-black mb-4">Abscents</h2>
+                <h2 class="text-2xl text-center text-black mb-4">Absents</h2>
                 <div class=" h-96 overflow-auto grid grid-cols-2 gap-2">
                     <div  v-for="student in Abstudent" :key="student.id">
                     <Table :Name="student.name"  :Mail="student.email" :absent="true" />
@@ -39,6 +42,12 @@ export default defineComponent({
   setup() {
     const Abstudent= ref([]);
     const PresentUsers = ref([]);
+    const evtSource = new EventSource("https://iot-m2-card.onrender.com/sse/1", {
+    withCredentials: false,
+    });
+    evtSource.onmessage = (event) => {
+        fetchData();
+    };
     // Fonction pour récupérer des données
     const fetchData = async () => {
       try {
