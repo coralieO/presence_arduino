@@ -8,7 +8,7 @@
             <p v-if="studentState">Présent</p>
             <p v-else>Absent</p>
         </div>
-    <button @click="sayHello">speak</button>
+    <button v-if="studentState" @click="sayHello">speak</button>
     </div>
 </template>
 
