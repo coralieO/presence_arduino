@@ -1,14 +1,12 @@
 <template>
-    <div class="content bg-cyan-700 px-3 py-2 mb-3">
-        <div class="name">
-            <h2 class="pr-2">{{lastName}}</h2>
-            <h2>{{ firstName }}</h2>
+    <div class="content bg-white border-b-2 border-green-500 px-3 py-2 mb-3
+     text-black text-center" :class="{ '!border-red-500': absent}">
+        <div class="name" v-on:change="sayHello">
+            <p class="font-bold">{{Name}}</p>
+            <p class="pt-1  text-sm">{{ Mail }}</p>
+            <button @click="sayHello">speak</button>
         </div>
-    <div class="state" v-on:change="sayHello">
-            <p v-if="studentState">Présent</p>
-            <p v-else>Absent</p>
-        </div>
-    <button @click="sayHello">speak</button>
+     
     </div>
 </template>
 
@@ -18,14 +16,15 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        lastName: String,
-        firstName: String,
-        studentState: Boolean
+        Name: String,
+        Mail: String,
+        studentState: Boolean,
+        absent: Boolean
     },
   setup(props) {
     const sayHello = () => {
       var msg = new SpeechSynthesisUtterance();
-      msg.text = "Bienvenu " + props.firstName;
+      msg.text = "Bienvenu " + props.Name;
       msg.lang = "fr";
       window.speechSynthesis.speak(msg);
     };
@@ -34,11 +33,6 @@ export default defineComponent({
 })
 </script>
 <style>
-.name{
-    display: flex;
-}
-.content{
-    width: 20rem;
-    border-radius: 20px;
-}
+
+
 </style>
