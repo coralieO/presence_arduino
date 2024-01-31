@@ -49,7 +49,9 @@ export default defineComponent({
     });
     evtSource.onmessage = (event) => {
         fetchData();
-        New.value = event.presentUsers.name
+        const ParseJson= JSON.parse(event.data)
+        New.value = ParseJson.data.user.name
+        console.log( New.value);
 
     };
     // Fonction pour récupérer des données
